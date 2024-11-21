@@ -9,9 +9,56 @@
 <body>
   <div class="container">
     <h1>AI Guess The Drawing</h1>
-    <canvas id="drawingCanvas"></canvas>
-    <button id="clearButton">Clear</button>
-    <div id="aiGuess">AI's Guess: <span id="guessOutput">...</span></div>
+    <p>Draw something on the canvas, and let the AI guess what it is!</p>
+    
+    <!-- Canvas Section -->
+    <div id="drawingSection">
+        <canvas id="drawingCanvas" width="400" height="400"></canvas>
+    </div>
+
+     <!-- Drawing Controls -->
+     <div id="controls">
+        <label for="colorPicker">Choose Drawing Color:</label>
+        <input type="color" id="colorPicker" value="#000000">
+  
+        <label for="brushSize">Brush Size:</label>
+        <input type="range" id="brushSize" min="1" max="10" value="2">
+  
+        <label for="backgroundSelect">Choose Background:</label>
+        <select id="backgroundSelect">
+          <option value="blank">Blank</option>
+          <option value="grid">Grid</option>
+          <option value="dots">Dots</option>
+        </select>
+      </div>
+
+      <!-- Buttons -->
+    <div class="buttons">
+        <button id="clearButton">Clear</button>
+        <button id="saveButton">Save Drawing</button>
+        <button id="submitButton">Submit to AI</button>
+      </div>
+    
+    <!-- AI Guess Section -->
+    <div id="aiGuess">
+      <h2>AI's Guess:</h2>
+      <p><span id="guessOutput">...</span></p>
+    </div>
+
+    <!-- User Feedback Section -->
+    <div id="feedback">
+      <h3>Was the AI correct?</h3>
+      <button class="feedback-button" id="correctButton">Yes</button>
+      <button class="feedback-button" id="incorrectButton">No</button>
+    </div>
+
+    <!-- Drawing History Section -->
+    <div id="history">
+      <h3>Drawing History:</h3>
+      <ul id="historyList">
+        <!-- Items will be dynamically added -->
+      </ul>
+    </div>
   </div>
   <script src="src/script.js"></script>
 </body>
