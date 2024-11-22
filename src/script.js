@@ -31,7 +31,7 @@ function draw(event) {
   ctx.stroke();
 }
 
-/************************* */
+/*************Using TensorFlaw.js************ */
 let model;
 
 // Load the pre-trained model
@@ -42,3 +42,26 @@ async function loadModel() {
 
 loadModel();
 
+ /****************/
+async function predictDrawing() {
+    if (!model) return;
+  
+    // Preprocess the canvas image
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const tensor = tf.browser.fromPixels(imgData, 1) //Converts the canvas image into a TensorFlow tensor
+      .resizeNearestNeighbor([28, 28])
+      .toFloat()
+      .expandDims(0);
+  
+    // Predict the drawing
+    const prediction = model.predict(tensor); //Passes the preprocessed tensor to the loaded machine learning model for prediction
+    const topGuess = prediction.argMax(-1).dataSync()[0]; //Finds the index of the highest probability (the most likely class) and concvert to a regular JavaScript array
+    guessOutput.textContent = `Guess: ${getLabel(topGuess)}`;
+  }
+  
+  function getLabel(index) {
+    const labels = ['circle', 'square', 'triangle', 'etc.']; //The labels of the classes
+    return labels[index] || 'Unknown';
+  }
+  
+  setInterval(predictDrawing, 2000); //call the function every 2 sec
