@@ -30,3 +30,15 @@ function draw(event) {
   ctx.lineTo(event.offsetX, event.offsetY);
   ctx.stroke();
 }
+
+/************************* */
+let model;
+
+// Load the pre-trained model
+async function loadModel() {
+  model = await tf.loadLayersModel('https://storage.googleapis.com/tfjs-models/savedmodel/quickdraw/model.json');
+  console.log('Model Loaded!');
+}
+
+loadModel();
+
